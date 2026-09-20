@@ -1,4 +1,4 @@
-import {finishImage,resolveDateSettings} from './finish.mjs';
+import {finishImage,resolveDateSettings} from './finish.mjs?v=20260921-live-measured-1';
 
 // Two independently developed images; assembly dimensions are local, not recovered G-HALF layout constants.
 export function composePair(first,second,layout,gapRatio=.02){

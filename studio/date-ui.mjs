@@ -1,4 +1,4 @@
-import {dateTokens,resolveDateSettings} from './finish.mjs';
+import {dateTokens,resolveDateSettings} from './finish.mjs?v=20260921-live-measured-1';
 const asset=name=>new URL(`finish-assets/${name}.png`,import.meta.url).href;
 const labels={U2:['年／月／日','月／日／年','日＋时分'],T3:['年／月／日','月／日／年','时分＋日'],CCD12:['日期＋时分','仅日期']};
 export function mountDateUI({getSettings,getPreset,onChange}){

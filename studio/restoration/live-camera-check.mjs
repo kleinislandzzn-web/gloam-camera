@@ -1,5 +1,8 @@
-import {LiveCamera} from '../live-camera.mjs';
-import {defaultFilmSettings} from '../film-settings.mjs';
+import {LiveCamera} from '../live-camera.mjs?v=20260921-live-measured-1';
+import {Renderer} from '../renderer.mjs?v=20260921-live-measured-1';
+import {finishImage} from '../finish.mjs?v=20260921-live-measured-1';
+import {r51Settings} from '../r51-profiles.mjs?v=20260921-live-measured-1';
+import {defaultFilmSettings} from '../film-settings.mjs?v=20260921-live-measured-1';
 const results=[],check=(name,ok,detail)=>{results.push({name,ok:!!ok,detail});if(!ok)throw Error(name);};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const until=async fn=>{for(let i=0;i<150;i++){if(fn())return;await sleep(100);}throw Error('Timed out');};
@@ -27,6 +30,20 @@ try{
  const verified=[];
  for(const p of films){preset=p;settings=defaultFilmSettings(p);await session.refresh();session.draw();check('Preset '+p.id,session.running&&canvas.dataset.preset===p.id);verified.push(p.id);}
  check('All 31 main presets render',verified.length===31);
+ const copyPixels=source=>{const c=document.createElement('canvas');c.width=source.width;c.height=source.height;const x=c.getContext('2d');x.drawImage(source,0,0);return x.getImageData(0,0,c.width,c.height).data;};
+ const equal=(a,b)=>a.length===b.length&&a.every((v,i)=>v===b[i]);
+ const offline=new Renderer(document.createElement('canvas'));
+ for(const [id,mode] of [['CCD2008_STD','noflash'],['CCD2008_STD','flash'],['T3_5219','noflash']]){
+  preset=films.find(p=>p.id===id);settings={...defaultFilmSettings(preset),...(id==='CCD2008_STD'?r51Settings(mode):{})};await session.refresh();session.draw();
+  const live=copyPixels(canvas),frozen=session.source(320,240,true);offline.lastImages.source=null;offline.render(frozen,session.prepared,settings,320,240,[320,240]);const expected=copyPixels(finishImage(offline.canvas,settings));
+  check(id+' '+mode+' preview equals static renderer',equal(live,expected));
+  const pendingShot=session.capture();check(id+' pauses during capture',session.capturing);const captured=await pendingShot;check(id+' resumes after capture',!session.capturing);
+  const bitmap=await createImageBitmap(captured.blob),c=document.createElement('canvas');c.width=bitmap.width;c.height=bitmap.height;c.getContext('2d').drawImage(bitmap,0,0);bitmap.close();
+  check(id+' '+mode+' saved PNG equals static renderer',equal(copyPixels(c),expected));
+ }
+ session.previewSize=0;session.autoSize=720;session.drawTime=100;session.qualityChanged=performance.now()-4000;session.metrics();check('Slow automatic preview steps down',session.autoSize===480);
+ const previousSize=session.autoSize;session.metrics();check('Adaptive quality has hysteresis',session.autoSize===previousSize);
+
  settings={...settings,amount:0};await session.refresh();session.mirror=false;session.draw();const left=pixels();session.mirror=true;session.draw();const mirrored=pixels();
  check('Mirror flips camera input',left[1]>left[2]&&mirrored[2]>mirrored[1],{left,mirrored});
  const shot=await session.capture();check('PNG capture created',shot.blob.type==='image/png'&&shot.blob.size>100&&shot.width===320&&shot.height===240,{size:shot.blob.size,width:shot.width,height:shot.height});

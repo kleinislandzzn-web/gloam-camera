@@ -1,5 +1,5 @@
-import {highlightRecovery,highlightShoulder,fringeSeed,fringeComposite,ccdRadial,grainOriginal,vignetteResponse} from './extended-kernels.mjs';
-import {coordinates} from './optics.mjs';
+import {highlightRecovery,highlightShoulder,fringeSeed,fringeComposite,ccdRadial,grainOriginal,vignetteResponse} from './extended-kernels.mjs?v=20260921-live-measured-1';
+import {coordinates} from './optics.mjs?v=20260921-live-measured-1';
 
 // Original kernels, local controls/thresholds. New effects remain opt-in until camera factories are recovered.
 export const EXTENDED_DEFAULTS=Object.freeze({highlightRecovery:0,highlightShoulder:0,blueFringe:0,fringeSpread:.35,ccdCenter:1,ccdEdge:1,grainShadow:1,grainMid:1,grainHigh:1,vignetteTone:0,vignetteShadowProtect:.6,vignetteHighlightProtect:.7});

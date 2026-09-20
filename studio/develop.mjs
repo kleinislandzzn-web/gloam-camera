@@ -1,5 +1,6 @@
-import {mistFinalize,mistExcess,mistMask,haloComposite,reflectionSeed,toneRange,exponentialMix} from './recovered-kernels.mjs';
-import {mistProfile} from './mist-enhancement.mjs';
+import {mistFinalize,mistExcess,mistMask,haloComposite,reflectionSeed,toneRange,exponentialMix} from './recovered-kernels.mjs?v=20260921-live-measured-1';
+import {measured5219Optics} from './measured-5219.mjs?v=20260921-live-measured-1';
+import {mistProfile} from './mist-enhancement.mjs?v=20260921-live-measured-1';
 const COMMON=`const vec3 LUMA=vec3(.2126,.7152,.0722);
 vec3 toLinear(vec3 v){v=max(v,0.);return mix(v/12.92,pow((v+.055)/1.055,vec3(2.4)),step(vec3(.04045),v));}
 vec3 toGamma(vec3 v){v=max(v,0.);return mix(v*12.92,1.055*pow(v,vec3(1./2.4))-.055,step(vec3(.0031308),v));}`;
@@ -73,13 +74,15 @@ export function opticalDevelop(r,input,s,w,h,originalSize){
  if(gradeH>0){
   // Original grade factory 0x100627ce0 and render normalization 0x1004f9ab8.
   const reflectionGain=2**[-4.1,-3.35,-2.5,-1.58][Math.max(0,Math.min(3,gradeH-1))];
-  const q=Math.min(1,900/Math.max(w,h)),hw=Math.max(1,Math.round(w*q)),hh=Math.max(1,Math.round(h*q)),seed=r.frame(42,hw,hh),baseColor=[.26/2.26,1/2.26,1/2.26];
+  const measured=s.measured5219===1?measured5219Optics():null;
+  const q=Math.min(1,900/Math.max(w,h)),hw=Math.max(1,Math.round(w*q)),hh=Math.max(1,Math.round(h*q)),seed=r.frame(42,hw,hh),baseColor=measured?.baseColor||[.26/2.26,1/2.26,1/2.26];
   r.pass('reflectionSeed',seed,hw,hh,{source},{baseColor});
   const diffuse=(radius,out)=>{
    const samples=[.35,.85,1.75].map((factor,i)=>{const sigma=Math.max(originalSize[0]/1000*radius*factor,.5);return blur(r,seed.texture,48+i,51,hw,hh,sigma/originalSize[0],sigma/originalSize[1]);});
    const f=r.frame(out,hw,hh);r.pass('exponentialMix',f,hw,hh,{nearTex:samples[0],midTex:samples[1],farTex:samples[2]});return f.texture;
   };
-  const red=diffuse(14.07,43),green=diffuse(14.07,45),blue=diffuse(14.17,46);
+  const radius=measured?.baseBlurAmount??14.07;
+  const red=diffuse(radius,43),green=diffuse(radius+(measured?.greenBlurAmount??0),45),blue=diffuse(radius+(measured?.greenBlurAmount??0)+(measured?.blueBlurAmount??.1),46);
   const out=r.frame(47,w,h);r.pass('haloComposite',out,w,h,{source,redTex:red,greenTex:green,blueTex:blue},{baseColor,reflectionGain,greenGain:2**-1.4,blueGain:2**-1.4,correctionMode:2});source=out.texture;
  }
  return source;

@@ -1,6 +1,9 @@
-import {EXTENDED_DEFAULTS,installExtended,extendedTone,extendedFringe,textureGLSL,ccdRadialGLSL} from './extended-effects.mjs';
-import {installDevelop,preDevelop,postDevelop,opticalDevelop} from './develop.mjs';
-import {CCD_RECIPE,coordinates,ccdKernel,aberrationKernel} from './optics.mjs';
+import {R51_ID,R51_PROFILES} from './r51-profiles.mjs?v=20260921-live-measured-1';
+import {installR51,renderR51} from './r51-render.mjs?v=20260921-live-measured-1';
+import {MEASURED_5219_ID} from './measured-5219.mjs?v=20260921-live-measured-1';
+import {EXTENDED_DEFAULTS,installExtended,extendedTone,extendedFringe,textureGLSL,ccdRadialGLSL} from './extended-effects.mjs?v=20260921-live-measured-1';
+import {installDevelop,preDevelop,postDevelop,opticalDevelop} from './develop.mjs?v=20260921-live-measured-1';
+import {CCD_RECIPE,coordinates,ccdKernel,aberrationKernel} from './optics.mjs?v=20260921-live-measured-1';
 // Event-driven WebGL2 renderer. Recipes are local approximations; see manifest and docs.
 export class Renderer {
  constructor(canvas) {
@@ -33,7 +36,7 @@ export class Renderer {
    uniform sampler2D source;uniform vec2 stepSize;void main(){vec3 v=texture(source,uv).rgb*.227027;v+=(texture(source,uv+stepSize*1.384615).rgb+texture(source,uv-stepSize*1.384615).rgb)*.316216;v+=(texture(source,uv+stepSize*3.230769).rgb+texture(source,uv-stepSize*3.230769).rgb)*.070270;color=vec4(v,1.);}`);
   this.programs.final=this.program(vertex,prefix+`
    uniform sampler2D source,graded,bloomTex,microTex,grainTex,vignetteTex,shadowTex;
-   uniform vec2 originalSize,grainSize;uniform float amount,grain,bloom,halation,vignette,hasVignette,hasShadow,shadowGrain;
+   uniform vec2 originalSize,grainSize;uniform float amount,grain,bloom,halation,vignette,hasVignette,hasShadow,shadowGrain,measured5219;
    ${textureGLSL}
    float soft(float b,float o){return o<.5?2.*b*o+b*b*(1.-2.*o):2.*b*(1.-o)+sqrt(max(b,0.))*(2.*o-1.);}
    vec3 grainBlend(vec3 base,vec3 over,float w){vec3 b=pow(clamp(base,0.,1.),vec3(1./2.2)),o=pow(clamp(over,0.,1.),vec3(1./2.2));vec3 s=vec3(soft(b.r,o.r),soft(b.g,o.g),soft(b.b,o.b));return pow(max(mix(b,s,w),0.),vec3(2.2));}
@@ -48,12 +51,17 @@ export class Renderer {
     float l=labL(c);float weight=grain*mix(1.05,.55,smoothstep(.25,.95,l));
     vec3 tex=texture(grainTex,uv*originalSize*.25/grainSize).rgb;c=applyOriginalGrain(c,tex);
     {vec3 s=hasShadow>.5?texture(shadowTex,uv).rgb:tex;c=grainBlend(c,s,shadowGrain*(1.-smoothstep(.1,.6,l)));}
-    if(hasVignette>.5){vec3 o=texture(vignetteTex,uv).rgb;vec3 b=clamp(c,0.,1.);vec3 v=vec3(vignetteSoft(b.r,o.r),vignetteSoft(b.g,o.g),vignetteSoft(b.b,o.b));c=mix(b,v,vignette);}
+    if(hasVignette>.5){vec4 overlay=texture(vignetteTex,uv);vec3 o=overlay.rgb;vec3 b=clamp(c,0.,1.);vec3 v=vec3(vignetteSoft(b.r,o.r),vignetteSoft(b.g,o.g),vignetteSoft(b.b,o.b));
+     // JPEG texture is already display-encoded here; do not apply linear-to-sRGB twice.
+     if(measured5219>.5){float amount=clamp(vignette,0.,2.),alpha=clamp(overlay.a,0.,1.);c=mix(b,v,min(amount,1.)*alpha);if(amount>1.){v=vec3(vignetteSoft(c.r,o.r),vignetteSoft(c.g,o.g),vignetteSoft(c.b,o.b));c=mix(c,v,(amount-1.)*alpha);}}
+     else c=mix(b,v,vignette);
+    }
     else{float r=length((uv-.5)*vec2(1.,1.));c*=1.-vignette*.32*smoothstep(.18,.70,r);}
     if(vignetteTone>0.)c=applyVignetteResponse(c);
     color=vec4(mix(original,clamp(c,0.,1.),amount),1.);
    }`);
   installDevelop(this,vertex,prefix);installExtended(this,vertex,prefix);
+  this.ensureR51=()=>{if(!this.programs.r51Output)installR51(this,vertex,prefix);};
   this.source=this.texture();this.grain=this.texture(true);this.vignette=this.texture();this.shadow=this.texture();this.lut=g.createTexture();this.lastImages={};this.lastTable=null;
  }
  program(v,f){const g=this.gl,p=g.createProgram();for(const [type,text] of [[g.VERTEX_SHADER,v],[g.FRAGMENT_SHADER,f]]){const s=g.createShader(type);g.shaderSource(s,text);g.compileShader(s);if(!g.getShaderParameter(s,g.COMPILE_STATUS))throw Error(g.getShaderInfoLog(s));g.attachShader(p,s);g.deleteShader(s);}g.linkProgram(p);if(!g.getProgramParameter(p,g.LINK_STATUS))throw Error(g.getProgramInfoLog(p));return p;}
@@ -62,10 +70,11 @@ export class Renderer {
  frame(index,w,h){const g=this.gl;let f=this.frames[index];if(!f){f=this.frames[index]={texture:this.texture(),buffer:g.createFramebuffer()};}if(f.w!==w||f.h!==h){g.activeTexture(g.TEXTURE0);g.bindTexture(g.TEXTURE_2D,f.texture);g.texImage2D(g.TEXTURE_2D,0,index>=30&&this.floatOptics?g.RGBA16F:g.RGBA,w,h,0,g.RGBA,index>=30&&this.floatOptics?g.HALF_FLOAT:g.UNSIGNED_BYTE,null);g.bindFramebuffer(g.FRAMEBUFFER,f.buffer);g.framebufferTexture2D(g.FRAMEBUFFER,g.COLOR_ATTACHMENT0,g.TEXTURE_2D,f.texture,0);if(g.checkFramebufferStatus(g.FRAMEBUFFER)!==g.FRAMEBUFFER_COMPLETE)throw Error('GPU framebuffer 分配失败');f.w=w;f.h=h;}return f;}
  pass(name,frame,w,h,textures,uniforms={}){const g=this.gl,p=this.programs[name];g.useProgram(p);g.bindFramebuffer(g.FRAMEBUFFER,frame?.buffer||null);g.viewport(0,0,w,h);let i=0;for(const [name,t] of Object.entries(textures)){g.activeTexture(g.TEXTURE0+i);g.bindTexture(name==='lut'?g.TEXTURE_3D:g.TEXTURE_2D,t);g.uniform1i(g.getUniformLocation(p,name),i++);}for(const [name,v] of Object.entries(uniforms)){const loc=g.getUniformLocation(p,name);if(Array.isArray(v)){if(v.length===3)g.uniform3fv(loc,v);else g.uniform2fv(loc,v);}else if(name==='size')g.uniform1i(loc,v);else g.uniform1f(loc,v);}g.drawArrays(g.TRIANGLES,0,3);}
  render(image,prepared,settings,width,height,originalSize){
-  settings={...EXTENDED_DEFAULTS,...settings};
+  settings={...EXTENDED_DEFAULTS,...settings,measured5219:prepared.presetId===MEASURED_5219_ID&&settings.measured5219===1?1:0};
   const g=this.gl;if(width>this.maxSize||height>this.maxSize)throw Error(`图片超过 GPU 最大尺寸 ${this.maxSize}`);this.canvas.width=width;this.canvas.height=height;
   this.image('source',this.source,image);this.image('grain',this.grain,prepared.grain);this.image('vignette',this.vignette,prepared.vignette);this.image('shadow',this.shadow,prepared.shadow);
   if(this.lastTable!==prepared.table){g.activeTexture(g.TEXTURE0);g.bindTexture(g.TEXTURE_3D,this.lut);g.pixelStorei(g.UNPACK_ALIGNMENT,1);g.texImage3D(g.TEXTURE_3D,0,g.RGB32F,prepared.size,prepared.size,prepared.size,0,g.RGB,g.FLOAT,prepared.table);for(const p of [g.TEXTURE_MIN_FILTER,g.TEXTURE_MAG_FILTER])g.texParameteri(g.TEXTURE_3D,p,g.NEAREST);this.lastTable=prepared.table;}
+  if(prepared.presetId===R51_ID&&Object.hasOwn(R51_PROFILES,settings.r51Profile))return renderR51(this,prepared,settings,width,height);
   const a=this.frame(0,width,height);const ratio=Math.min(1,440/Math.max(width,height)),bw=Math.max(1,Math.round(width*ratio)),bh=Math.max(1,Math.round(height*ratio));const b=this.frame(1,bw,bh),c=this.frame(2,bw,bh),d=this.frame(3,bw,bh),micro=this.frame(4,bw,bh);
   // Fix spatial scale across preview/export; original preset resolution policy is still unknown.
   const factor=1400/Math.max(...originalSize),referenceSize=originalSize.map(v=>v*factor);
@@ -98,5 +107,5 @@ export class Assets {
   if(preset.kind==='cube')nodes=[{node:preset.nodes[0],weight:1}];
   else{const i0=Math.floor(index),i1=Math.ceil(index),ks=[3500,5200,6500],k0=[...ks].reverse().find(k=>k<=kelvin)??3500,k1=ks.find(k=>k>=kelvin)??6500,kt=k0===k1?0:(kelvin-k0)/(k1-k0);const iw=i0===i1?[[i0,1]]:[[i0,1-(index-i0)],[i1,index-i0]],kw=k0===k1?[[k0,1]]:[[k0,1-kt],[k1,kt]];nodes=iw.flatMap(([i,a])=>kw.map(([k,b])=>({node:preset.nodes.find(n=>n.index===i&&n.kelvin===k),weight:a*b}))).filter(n=>n.weight>0);if(nodes.some(n=>!n.node))throw Error('缺少矩阵节点');}
   const values=await Promise.all(nodes.map(n=>this.table(n.node.table)));let table=values[0];if(nodes.length>1){table=new Float32Array(values[0].length);for(let n=0;n<nodes.length;n++)for(let i=0;i<table.length;i++)table[i]+=values[n][i]*nodes[n].weight;}
-  const [grain,vignette,shadow]=await Promise.all([this.image(preset.grain),this.image(preset.vignetteTexture),this.image(preset.shadowTexture)]);return {table,size:this.manifest.tables[nodes[0].node.table].size,grain,vignette,shadow};})();this.prepared.set(key,task);if(this.prepared.size>60)this.prepared.delete(this.prepared.keys().next().value);return task;}
+  const [grain,vignette,shadow]=await Promise.all([this.image(preset.grain),this.image(preset.vignetteTexture),this.image(preset.shadowTexture)]);return {presetId:preset.id,table,size:this.manifest.tables[nodes[0].node.table].size,grain,vignette,shadow};})();this.prepared.set(key,task);if(this.prepared.size>60)this.prepared.delete(this.prepared.keys().next().value);return task;}
 }

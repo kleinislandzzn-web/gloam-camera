@@ -1,12 +1,17 @@
-import {mountDateUI} from './date-ui.mjs';
-import {EDIT_CONTROLS,MIST_LABELS,HALATION_LABELS} from './editor-settings.mjs';
-import {FINISH_OPTIONS} from './finish.mjs';
+import {R51_ID,r51Settings,R51_NOTE} from './r51-profiles.mjs?v=20260921-live-measured-1';
+import {MEASURED_5219_ID,MEASURED_5219_NOTE} from './measured-5219.mjs?v=20260921-live-measured-1';
+import {mountDateUI} from './date-ui.mjs?v=20260921-live-measured-1';
+import {EDIT_CONTROLS,MIST_LABELS,HALATION_LABELS} from './editor-settings.mjs?v=20260921-live-measured-1';
+import {FINISH_OPTIONS} from './finish.mjs?v=20260921-live-measured-1';
 const $=s=>document.querySelector(s);
 export const CONTROL_KEYS=['amount','exposure','grain','blackMistGrade','blackMistBoost','halationGrade','vignette','ccd','aberration','caPixels','node','kelvin',...EDIT_CONTROLS.map(x=>x[0])];
 export function divisor(key){if(key==='blackMistGrade'||key==='halationGrade'||key==='kelvin')return 1;if(key==='node'||key==='caPixels')return 10;return 100;}
 export function labelValue(key,v){if(key==='blackMistGrade')return MIST_LABELS[v]||'关闭';if(key==='halationGrade')return HALATION_LABELS[v]||'关闭';if(key==='exposure'||key==='negativeExposure')return v.toFixed(1)+' EV';if(key==='caPixels')return '±'+v.toFixed(1)+' px';if(key==='node')return v.toFixed(1);if(key==='kelvin')return v+' K';return Math.round(v*100)+(EDIT_CONTROLS.some(x=>x[0]===key&&x[5]==='')?'':'%');}
 export function mountEditorUI({getSettings,getPreset,onChange,onAutoWB,onAutoTone,getPhotos}){
  const anchor=$('.calibration'),groups={};
+ const r51Panel=document.createElement('section');r51Panel.id='r51-measured';r51Panel.innerHTML='<label class="select-control">R-51 实测配方<select id="r51-profile"><option value="noflash">无闪实测</option><option value="flash">有闪实测</option></select></label><p>应用两次拍摄的固定配方，不模拟真实闪光照明。</p><details><summary>恢复范围</summary><p></p></details>';r51Panel.querySelector('details p').textContent=R51_NOTE;document.querySelector('.controls')?.prepend(r51Panel);if(!r51Panel.isConnected)anchor.before(r51Panel);
+ r51Panel.querySelector('select').onchange=e=>{onChange(r51Settings(e.target.value));refresh();};
+ const measuredNote=document.createElement('p');measuredNote.id='measured-recipe-note';measuredNote.textContent=MEASURED_5219_NOTE;anchor.prepend(measuredNote);
  for(const [key,title,min,max,scale,unit,group] of EDIT_CONTROLS){
   if(!groups[group]){const d=document.createElement('details');d.className='edit-group';d.innerHTML=`<summary>${group}</summary>`;anchor.before(d);groups[group]=d;}
   const row=document.createElement('div');row.className='range-control';row.innerHTML=`<label for="${key}">${title}<output id="${key}-value">0</output></label><input id="${key}" type="range" min="${min}" max="${max}" value="0">`;groups[group].append(row);
@@ -36,7 +41,9 @@ export function mountEditorUI({getSettings,getPreset,onChange,onAutoWB,onAutoTon
  const quality=document.createElement('label');quality.className='select-control';quality.innerHTML='黑柔质量<select id="blackMistQuality"><option value="0">预览</option><option value="1">平衡／高</option></select>';anchor.append(quality);fields.push('blackMistQuality');
  for(const key of fields){$('#'+key).addEventListener('input',e=>{let v=e.target.value;if(['cropX','cropY','dateYear','blackMistQuality','dust','lightLeak'].includes(key))v=Number(v);if(key==='dust'||key==='lightLeak')v/=100;if(key==='dateYear'&&(v<1900||v>2099))return;const patch={[key]:v};if(key==='dateValue'&&/^\d{4}-\d{2}-\d{2}$/.test(v))patch.dateYear=Number(v.slice(0,4));onChange(patch);refresh();});}
  const dateUI=mountDateUI({getSettings,getPreset,onChange});
- function refresh(){dateUI.refresh();const s=getSettings();collage.hidden=getPreset().family!=='G-HALF';const select=$('#secondPhotoId');const list=getPhotos();const key=list.map(p=>p.id).join('|');if(select.dataset.list!==key){select.dataset.list=key;select.replaceChildren(new Option('请选择原图',''),...list.map(p=>new Option(p.name,p.id)));}select.value=s.secondPhotoId;$('#collageLayout').value=s.collageLayout;$('#collageGap').value=s.collageGap;for(const key of fields){const el=$('#'+key);el.value=(key==='dust'||key==='lightLeak')?Math.round(s[key]*100):s[key];const output=$('#'+key+'-value');if(output)output.textContent=Math.round(s[key]*100)+'%';}
+ function refresh(){const isR51=getPreset().id===R51_ID;document.body.classList.toggle('r51-editor',isR51);r51Panel.hidden=!isR51;$('#r51-profile').value=getSettings().r51Profile||'noflash';
+  for(const key of ['caPixels','fringeSpread','grainHigh','vignetteTone','vignetteShadowProtect','vignetteHighlightProtect']){const input=$('#'+key);input.disabled=isR51;input.closest('.range-control').hidden=isR51;}
+  measuredNote.hidden=getPreset().id!==MEASURED_5219_ID;$('#vignette').max=getPreset().id===MEASURED_5219_ID?200:100;dateUI.refresh();const s=getSettings();collage.hidden=getPreset().family!=='G-HALF';const select=$('#secondPhotoId');const list=getPhotos();const key=list.map(p=>p.id).join('|');if(select.dataset.list!==key){select.dataset.list=key;select.replaceChildren(new Option('请选择原图',''),...list.map(p=>new Option(p.name,p.id)));}select.value=s.secondPhotoId;$('#collageLayout').value=s.collageLayout;$('#collageGap').value=s.collageGap;for(const key of fields){const el=$('#'+key);el.value=(key==='dust'||key==='lightLeak')?Math.round(s[key]*100):s[key];const output=$('#'+key+'-value');if(output)output.textContent=Math.round(s[key]*100)+'%';}
   for(const key of ['border']){const item=FINISH_OPTIONS[key].find(x=>x.value===s[key]),im=$('#'+key+'-preview');im.hidden=!item?.src;if(item?.src)im.src=item.src;}
  }
  return {refresh};

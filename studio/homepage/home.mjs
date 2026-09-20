@@ -1,10 +1,12 @@
-import {finishPhoto} from '../photo-finish.mjs';
-import {openSamples} from '../sample-gallery.mjs';
-import {CAMERA_COPY} from '../original-copy.mjs';
-import {Renderer,Assets} from '../renderer.mjs';
-import {prepareFinish,finishImage} from '../finish.mjs';
-import {readFilmSettings,filmIsEdited,colorOnlySettings} from '../film-settings.mjs';
-import {MIST_LABELS,HALATION_LABELS} from '../editor-settings.mjs';
+import {R51_ID,r51Name,R51_NOTE} from '../r51-profiles.mjs?v=20260921-live-measured-1';
+import {MEASURED_5219_ID,MEASURED_5219_LABEL,MEASURED_5219_NOTE} from '../measured-5219.mjs?v=20260921-live-measured-1';
+import {finishPhoto} from '../photo-finish.mjs?v=20260921-live-measured-1';
+import {openSamples} from '../sample-gallery.mjs?v=20260921-live-measured-1';
+import {CAMERA_COPY} from '../original-copy.mjs?v=20260921-live-measured-1';
+import {Renderer,Assets} from '../renderer.mjs?v=20260921-live-measured-1';
+import {prepareFinish,finishImage} from '../finish.mjs?v=20260921-live-measured-1';
+import {readFilmSettings,filmIsEdited,colorOnlySettings} from '../film-settings.mjs?v=20260921-live-measured-1';
+import {MIST_LABELS,HALATION_LABELS} from '../editor-settings.mjs?v=20260921-live-measured-1';
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const url=p=>new URL('../'+p,import.meta.url).href;
@@ -29,12 +31,12 @@ function configMarkup(p){
  const values=[['颗粒',pct(s.grain)],[s.blackMistGrade>0&&s.blackMistBoost>0?'黑柔增强':'黑柔',MIST_LABELS[s.blackMistGrade]],['光晕',HALATION_LABELS[s.halationGrade]]];
  if(p.family==='CCD2008'||p.family==='G12'||p.family==='GRD')values.push(['CCD',pct(s.ccd)]);else values.push(['暗角',pct(s.vignette)]);
  if(s.blueFringe>0)values.push(['蓝紫边',pct(s.blueFringe)]);if(s.highlightRecovery>0)values.push(['高光压缩',pct(s.highlightRecovery)]);if(p.family==='G-HALF'&&s.collageLayout!=='none')values.push(['半格',s.collageLayout==='horizontal'?'左右':'上下']);
- return `<span class="config-top"><span>${edited?'我的配置':'试片配置'}</span><span>调节 ↗</span></span><span class="config-values">${values.map(([k,v])=>`<span>${k}<b>${esc(v||'关闭')}</b></span>`).join('')}</span>`;
+ return `<span class="config-top"><span>${p.id===R51_ID?r51Name(s.r51Profile)+(edited?' · 已调节':''):edited?'我的配置':p.id===MEASURED_5219_ID?'无闪实测试片':'试片配置'}</span><span>调节 ↗</span></span><span class="config-values">${values.map(([k,v])=>`<span>${k}<b>${esc(v||'关闭')}</b></span>`).join('')}</span>`;
 }
 function cardMarkup(p,index){const a=art.presets[p.id],name=p.name.split(' · ').slice(1).join(' · ')||p.name;return `<article class="film-card" data-film="${p.id}">
  <button class="film-preview" data-open="${p.id}" aria-label="查看并调整 ${esc(p.name)}" data-ready="false"><img class="effect-image" src="${sourceURL(photo.thumb)}" alt="${esc(p.name)} 效果预览"><img class="before-image" src="${sourceURL(photo.preview)}" alt="原图对照" hidden><span class="film-number">${String(index+1).padStart(2,'0')}</span><span class="preview-badge">生成中</span><span class="preview-action">查看大图与前后对比 <span>↗</span></span></button>
  <div class="film-identity"><div><span class="film-family">${esc(p.family)}</span><h3>${esc(name)}</h3></div>${a?`<button class="artwork-button" data-open="${p.id}" title="${esc(a.mapping)}" aria-label="打开 ${esc(p.name)} 原包配置卡片"><img src="${url(a.src)}" alt="${esc(p.name)} ${a.shared?'共用':'原包'}卡片" loading="lazy"></button>`:''}</div>
- <button class="config-card" data-open="${p.id}" aria-label="调整 ${esc(p.name)} 的独立配置">${configMarkup(p)}</button><p class="card-origin"><span>${a?.shared?'50D 系列共用卡片':'原包胶片卡片'}</span><span>${p.kind==='matrix'?'15 个色彩节点':'独立 Cube 色表'}</span></p></article>`;}
+ <button class="config-card" data-open="${p.id}" aria-label="调整 ${esc(p.name)} 的独立配置">${configMarkup(p)}</button><p class="card-origin"><span>${a?.shared?'50D 系列共用卡片':'原包胶片卡片'}</span><span>${p.kind==='matrix'?'15 个色彩节点':'独立 Cube 色表'}</span></p>${p.id===MEASURED_5219_ID?`<p class="measured-recipe-note" style="font-size:12px;color:#a8b49a;line-height:1.6" title="${MEASURED_5219_NOTE}">${MEASURED_5219_LABEL} · 自动调参待恢复</p>`:''}${p.id===R51_ID?`<p class="r51-note" style="font-size:12px;color:#a8b49a;line-height:1.6" title="${R51_NOTE}">固定实测配方 · 点击配置切换有闪／无闪 · 部分恢复</p>`:''}</article>`;}
 async function renderGallery(){
  const job=++generation,list=visibleFilms(),source=photo,renderMode=mode;
  $('#home-error').hidden=true;$('#results-title').innerHTML=`${family==='全部'?'全部胶片':esc(family)} <span>${list.length}</span>`;
@@ -94,6 +96,7 @@ async function init(){
  $('#film-search').oninput=renderGallery;$('#clear-search').onclick=()=>{$('#film-search').value='';setFamily('全部');};
  for(const [id,next] of [['recipe-mode','recipe'],['color-mode','color']])$('#'+id).onclick=()=>{mode=next;$('#recipe-mode').setAttribute('aria-pressed',String(mode==='recipe'));$('#color-mode').setAttribute('aria-pressed',String(mode==='color'));renderGallery();};
  $('#show-before').onclick=()=>{const on=$('#show-before').getAttribute('aria-pressed')!=='true';$('#show-before').setAttribute('aria-pressed',String(on));$('#show-before').textContent=on?'返回胶片效果':'查看全部原图';$('#film-grid').classList.toggle('show-before',on);$$('.film-preview[data-ready=true]').forEach(b=>{const p=data.presets.find(p=>p.id===b.dataset.open);b.querySelector('.preview-badge').textContent=on?'BEFORE':mode==='color'?'仅颜色':filmIsEdited(p)?'我的配置':'AFTER';});};
+ const requested=new URLSearchParams(location.search).get('film');const initial=data.presets.find(p=>p.id===requested&&p.group==='main');if(initial)$('#film-search').value=initial.id;
  $('#upload-trigger').disabled=false;updateSources();await renderGallery();
 }
 init().catch(alertError);

@@ -5,3 +5,6 @@
 .profile-art{display:block;float:right;width:64px;height:48px;margin:0 0 10px 8px}.sibling-films{clear:both}.embedded-editor .profile-art{height:48px}.profile-heading{min-height:38px}
 .sibling-films button{flex-basis:calc((100% - (var(--film-count) - 1)*7px)/var(--film-count))}
 .mist-boost{margin-top:23px;padding-top:16px;border-top:1px solid #465236}.mist-boost label{color:#d5e2be}
+
+#r51-measured{grid-column:1/-1;padding:0 0 15px;margin-bottom:18px;border-bottom:1px solid #465236}#r51-measured p{font-size:11px;font-weight:400;line-height:1.7;color:#aab899;margin:8px 0}#r51-measured summary{font-size:10px}
+@media(max-width:620px){body.r51-editor .workspace{display:flex;flex-direction:column;height:auto;min-height:0}body.r51-editor .library{display:none}body.r51-editor .workspace>main{height:650px;flex:none;width:100%}body.r51-editor .controls{display:block;width:100%;overflow:visible}body.r51-editor .topbar{gap:10px}body.r51-editor .study-link{display:none}body.r51-editor #open-camera{font-size:12px}body.r51-editor .compare-bar{flex-wrap:wrap}body.r51-editor .tool-picker{grid-template-columns:repeat(6,minmax(0,1fr))}}
