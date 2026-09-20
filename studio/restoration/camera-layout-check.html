@@ -1,0 +1,7 @@
+<!doctype html><meta charset="utf-8"><title>Camera mobile layout checks</title>
+<style>body{background:#333;color:#eee;font:14px monospace}iframe{height:850px;border:0;display:inline-block;vertical-align:top}pre{white-space:pre-wrap}</style>
+<pre id="result">Running…</pre><div id="frames"></div>
+<script type="module">
+const rows=[];for(const width of [360,390,768]){const frame=document.createElement('iframe');frame.width=width;frame.src='../../camera.html?preset=U2_U400V2';document.querySelector('#frames').append(frame);await new Promise(r=>frame.onload=r);const d=frame.contentDocument;for(let i=0;i<100&&!d.querySelector('#camera-family option');i++)await new Promise(r=>setTimeout(r,50));rows.push({width,contentWidth:d.documentElement.scrollWidth,noOverflow:d.documentElement.scrollWidth<=width,selectedFilm:d.querySelector('#camera-film').value,families:d.querySelectorAll('#camera-family option').length,shutterDisabled:d.querySelector('#camera-shutter').disabled});}
+document.querySelector('#result').textContent=JSON.stringify({status:rows.every(r=>r.noOverflow&&r.selectedFilm==='U2_U400V2'&&r.families===8&&r.shutterDisabled)?'PASS':'FAIL',rows},null,2);
+</script>

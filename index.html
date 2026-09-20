@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="用同一张照片探索 Gloam 的 8 个相机家族与 31 款胶片，查看原版卡片，独立调整与保存每款配置。"><title>Gloam · 胶片试片室</title><link rel="icon" href="studio/homepage/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="studio/homepage/home.css"><link rel="stylesheet" href="studio/sample-gallery.css"></head>
+<body>
+<a class="skip" href="#film-grid">跳到胶片</a>
+<header class="masthead"><a class="brand" href="index.html" aria-label="Gloam 胶片试片室首页"><span class="brand-mark">g.</span><span class="brand-name">gloam<small>胶片试片室</small></span></a><nav><span class="local">本机处理</span><a href="editor.html">显影工作台 ↗</a><a href="about.html" target="_blank" rel="noopener">版本说明 ↗</a></nav></header>
+<main>
+<section class="intro"><div><p class="eyebrow">THE FILM COLLECTION</p><h1>One frame. <em>Different films.</em></h1><p class="intro-copy">8 个相机家族，31 款胶片。找到属于这张照片的质感。</p></div><div class="intro-side"><a class="camera-entry" href="camera.html">实时拍摄 ↗</a><button class="primary" id="upload-trigger" disabled><span aria-hidden="true">＋</span> 上传新图片</button><small>可多选 · JPG / PNG / WebP<br>图片仅在本机处理</small><input id="upload" type="file" accept="image/jpeg,image/png,image/webp" multiple hidden></div></section>
+<section class="source-panel" aria-label="选择原图"><div class="section-top"><h2>BEFORE <span id="source-count">14 张原图</span></h2><span id="source-name"></span></div><div id="sources" class="sources"></div><div class="source-bottom"><span>选择一张原图，对照所有胶片效果</span><span id="upload-status" role="status"></span></div></section>
+<nav id="camera-families" class="families" aria-label="选择相机家族"></nav>
+<div class="toolbar"><div class="segmented" aria-label="效果模式"><button id="recipe-mode" aria-pressed="true">胶片 + 配置</button><button id="color-mode" aria-pressed="false">仅胶片颜色</button></div><div class="toolbar-right"><label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="film-search" type="search" placeholder="搜索胶片 / 相机名称" aria-label="搜索胶片或相机名称"></label><button id="show-before" aria-pressed="false">查看全部原图</button></div></div>
+<div class="results-line"><div><h2 id="results-title">全部胶片 <span>31</span></h2><p id="family-caption">同一张原图，不同胶片的颜色与质感。</p></div><div class="results-actions"><button id="open-samples" class="home-samples">原 App 样片 ↗</button><span id="progress" role="status">准备胶片…</span></div></div>
+<div id="home-error" role="alert" hidden></div><section id="film-grid" class="film-grid" aria-label="胶片效果与配置卡片"></section><div id="empty" hidden><p>没有找到这款胶片</p><button id="clear-search">清除搜索与筛选</button></div>
+<footer><p>原包胶片卡片与色表 · 每款配置独立保存在本机</p><p>当前为本地重建版本，部分配置为本地设定，尚未与原 App 同图导出校准。<a href="about.html" target="_blank" rel="noopener">恢复范围与依据 ↗</a></p></footer>
+</main>
+<dialog id="film-detail" aria-label="胶片显影详情"><div class="detail-heading"><span id="detail-label">胶片显影</span><span class="detail-hint">每款胶片单独记住你的调整</span><button id="close-detail" aria-label="关闭胶片详情">✕</button></div><iframe id="editor-frame" title="Gloam 胶片显影工作台"></iframe></dialog>
+<div id="drop-overlay" hidden>松开，加入这批原图<span>全部胶片将应用到你选择的照片</span></div>
+<script type="module" src="studio/homepage/home.mjs"></script>
+</body></html>

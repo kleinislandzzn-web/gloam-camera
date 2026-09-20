@@ -1,0 +1,1071 @@
+{
+  "source": "Gloam 1.3.3 IPA Assets.car; ExternalLink assets require separately downloaded resource packs",
+  "expectedCount": 134,
+  "availableCount": 1,
+  "families": [
+    {
+      "name": "T3",
+      "expectedCount": 29,
+      "availableCount": 1
+    },
+    {
+      "name": "U2",
+      "expectedCount": 18,
+      "availableCount": 0
+    },
+    {
+      "name": "G-HALF",
+      "expectedCount": 20,
+      "availableCount": 0
+    },
+    {
+      "name": "GRD",
+      "expectedCount": 31,
+      "availableCount": 0
+    },
+    {
+      "name": "FX",
+      "expectedCount": 5,
+      "availableCount": 0
+    },
+    {
+      "name": "G12",
+      "expectedCount": 16,
+      "availableCount": 0
+    },
+    {
+      "name": "CCD2008",
+      "expectedCount": 10,
+      "availableCount": 0
+    },
+    {
+      "name": "M72",
+      "expectedCount": 5,
+      "availableCount": 0
+    }
+  ],
+  "groups": [
+    {
+      "id": "01_GRD_Neg",
+      "family": "GRD",
+      "label": "负片",
+      "presetIds": [
+        "GRD_Neg2"
+      ],
+      "description": "经典的柔和负片色彩，对人像、日光下表现突出。",
+      "sourceKey": "sample-description.11-grdn-neg",
+      "expectedCount": 7,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "01_GRD_Neg_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3ac5cda3ef3125291c5bc662d6ca6e4f"
+        },
+        {
+          "assetName": "01_GRD_Neg_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3ac5cda3ef3125291c5bc662d6ca6e4f"
+        },
+        {
+          "assetName": "01_GRD_Neg_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3ac5cda3ef3125291c5bc662d6ca6e4f"
+        },
+        {
+          "assetName": "01_GRD_Neg_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3ac5cda3ef3125291c5bc662d6ca6e4f"
+        },
+        {
+          "assetName": "01_GRD_Neg_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3ac5cda3ef3125291c5bc662d6ca6e4f"
+        },
+        {
+          "assetName": "01_GRD_Neg_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3ac5cda3ef3125291c5bc662d6ca6e4f"
+        },
+        {
+          "assetName": "01_GRD_Neg_07",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3ac5cda3ef3125291c5bc662d6ca6e4f"
+        }
+      ]
+    },
+    {
+      "id": "01_T3_5207E",
+      "family": "T3",
+      "label": "5207E",
+      "presetIds": [
+        "T3_5207S2"
+      ],
+      "description": "灵感来源于EVO药水冲扫的5207电影卷，颜色自然，日光下发暖。",
+      "sourceKey": "sample-description.08-t3n-5207e",
+      "expectedCount": 4,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "01_T3_5207E_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6ca678ad6d0811086ef38b90c686a0f5"
+        },
+        {
+          "assetName": "01_T3_5207E_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6ca678ad6d0811086ef38b90c686a0f5"
+        },
+        {
+          "assetName": "01_T3_5207E_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6ca678ad6d0811086ef38b90c686a0f5"
+        },
+        {
+          "assetName": "01_T3_5207E_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6ca678ad6d0811086ef38b90c686a0f5"
+        }
+      ]
+    },
+    {
+      "id": "01_U2_C100",
+      "family": "U2",
+      "label": "C100",
+      "presetIds": [
+        "U2_C1002"
+      ],
+      "description": "灵感来源于SP3000扫描的C100，颜色稍淡清新，日光下效果最好。",
+      "sourceKey": "sample-description.09-u2n-c100",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "01_U2_C100_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-7d369ad26afa3fb3c7ea01c4018ec67a"
+        },
+        {
+          "assetName": "01_U2_C100_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-7d369ad26afa3fb3c7ea01c4018ec67a"
+        },
+        {
+          "assetName": "01_U2_C100_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-7d369ad26afa3fb3c7ea01c4018ec67a"
+        },
+        {
+          "assetName": "01_U2_C100_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-7d369ad26afa3fb3c7ea01c4018ec67a"
+        },
+        {
+          "assetName": "01_U2_C100_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-7d369ad26afa3fb3c7ea01c4018ec67a"
+        },
+        {
+          "assetName": "01_U2_C100_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-7d369ad26afa3fb3c7ea01c4018ec67a"
+        }
+      ]
+    },
+    {
+      "id": "02_GRD_Pos",
+      "family": "GRD",
+      "label": "正片",
+      "presetIds": [
+        "GRD_Pos2"
+      ],
+      "description": "经典的正片色彩，颜色浓郁饱满，对蓝色红色表现突出。",
+      "sourceKey": "sample-description.11-grdn-pos",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "02_GRD_Pos_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-74179e56a7504ef08635a0568de02a73"
+        },
+        {
+          "assetName": "02_GRD_Pos_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-74179e56a7504ef08635a0568de02a73"
+        },
+        {
+          "assetName": "02_GRD_Pos_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-74179e56a7504ef08635a0568de02a73"
+        },
+        {
+          "assetName": "02_GRD_Pos_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-74179e56a7504ef08635a0568de02a73"
+        },
+        {
+          "assetName": "02_GRD_Pos_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-74179e56a7504ef08635a0568de02a73"
+        },
+        {
+          "assetName": "02_GRD_Pos_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-74179e56a7504ef08635a0568de02a73"
+        }
+      ]
+    },
+    {
+      "id": "02_T3_5219E",
+      "family": "T3",
+      "label": "5219E",
+      "presetIds": [
+        "T3_5219"
+      ],
+      "description": "灵感来源于EVO药水冲扫的5219灯光电影卷，在日光下会发蓝，在夜晚暖光源下表现更好，同时高光会带有红色光晕。",
+      "sourceKey": "sample-description.08-t3n-5219e",
+      "expectedCount": 4,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "02_T3_5219E_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-c156399c211bdc020332b215d6ec89b9"
+        },
+        {
+          "assetName": "02_T3_5219E_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-c156399c211bdc020332b215d6ec89b9"
+        },
+        {
+          "assetName": "02_T3_5219E_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-c156399c211bdc020332b215d6ec89b9"
+        },
+        {
+          "assetName": "02_T3_5219E_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-c156399c211bdc020332b215d6ec89b9"
+        }
+      ]
+    },
+    {
+      "id": "02_U2_G200",
+      "family": "U2",
+      "label": "Gold200",
+      "presetIds": [
+        "U2_Gold200"
+      ],
+      "description": "灵感来源于SP3000扫描的Gold200，颜色金色，在日光下有很不错的效果。",
+      "sourceKey": "sample-description.09-u2n-g200",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "02_U2_G200_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ae950019ed8efbd49743c3db7396aea"
+        },
+        {
+          "assetName": "02_U2_G200_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ae950019ed8efbd49743c3db7396aea"
+        },
+        {
+          "assetName": "02_U2_G200_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ae950019ed8efbd49743c3db7396aea"
+        },
+        {
+          "assetName": "02_U2_G200_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ae950019ed8efbd49743c3db7396aea"
+        },
+        {
+          "assetName": "02_U2_G200_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ae950019ed8efbd49743c3db7396aea"
+        },
+        {
+          "assetName": "02_U2_G200_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ae950019ed8efbd49743c3db7396aea"
+        }
+      ]
+    },
+    {
+      "id": "03_GRD_STD",
+      "family": "GRD",
+      "label": "经典",
+      "presetIds": [
+        "GRD_Std3"
+      ],
+      "description": "",
+      "sourceKey": null,
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "03_GRD_STD_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-eb935e66ba408d09ddb45e9eddc5e8b6"
+        },
+        {
+          "assetName": "03_GRD_STD_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-eb935e66ba408d09ddb45e9eddc5e8b6"
+        },
+        {
+          "assetName": "03_GRD_STD_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-eb935e66ba408d09ddb45e9eddc5e8b6"
+        },
+        {
+          "assetName": "03_GRD_STD_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-eb935e66ba408d09ddb45e9eddc5e8b6"
+        },
+        {
+          "assetName": "03_GRD_STD_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-eb935e66ba408d09ddb45e9eddc5e8b6"
+        },
+        {
+          "assetName": "03_GRD_STD_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-eb935e66ba408d09ddb45e9eddc5e8b6"
+        }
+      ]
+    },
+    {
+      "id": "03_T3_EK100L",
+      "family": "T3",
+      "label": "EK100L",
+      "presetIds": [
+        "T3_EK100"
+      ],
+      "description": "灵感来源于LUNA药水冲扫的Ektar100负片，复古浓郁。",
+      "sourceKey": "sample-description.08-t3n-ek100l",
+      "expectedCount": 3,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "03_T3_EK100L_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-2c6ad000204a337b7f194ba1b79892fb"
+        },
+        {
+          "assetName": "03_T3_EK100L_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-2c6ad000204a337b7f194ba1b79892fb"
+        },
+        {
+          "assetName": "03_T3_EK100L_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-2c6ad000204a337b7f194ba1b79892fb"
+        }
+      ]
+    },
+    {
+      "id": "03_U2_U400",
+      "family": "U2",
+      "label": "U400",
+      "presetIds": [
+        "U2_U400V2"
+      ],
+      "description": "灵感来源于SP3000扫描的Ultramax400，日光下具有非常清新的感觉。",
+      "sourceKey": "sample-description.09-u2n-u400",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "03_U2_U400_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6e7b8e2c705ceaf988bd22baed1861c9"
+        },
+        {
+          "assetName": "03_U2_U400_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6e7b8e2c705ceaf988bd22baed1861c9"
+        },
+        {
+          "assetName": "03_U2_U400_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6e7b8e2c705ceaf988bd22baed1861c9"
+        },
+        {
+          "assetName": "03_U2_U400_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6e7b8e2c705ceaf988bd22baed1861c9"
+        },
+        {
+          "assetName": "03_U2_U400_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6e7b8e2c705ceaf988bd22baed1861c9"
+        },
+        {
+          "assetName": "03_U2_U400_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6e7b8e2c705ceaf988bd22baed1861c9"
+        }
+      ]
+    },
+    {
+      "id": "04_FX_Neg",
+      "family": "FX",
+      "label": "负片（包内样片）",
+      "presetIds": [],
+      "description": "",
+      "sourceKey": null,
+      "expectedCount": 5,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "04_FX_Neg_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-136f04c768372c7f20a1797eac482664"
+        },
+        {
+          "assetName": "04_FX_Neg_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-136f04c768372c7f20a1797eac482664"
+        },
+        {
+          "assetName": "04_FX_Neg_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-136f04c768372c7f20a1797eac482664"
+        },
+        {
+          "assetName": "04_FX_Neg_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-136f04c768372c7f20a1797eac482664"
+        },
+        {
+          "assetName": "04_FX_Neg_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-136f04c768372c7f20a1797eac482664"
+        }
+      ]
+    },
+    {
+      "id": "04_GRD_PosR2",
+      "family": "GRD",
+      "label": "GR2 正片",
+      "presetIds": [
+        "GRD_PosR2"
+      ],
+      "description": "灵感来源于GR2的正片，对蓝色表现突出自然。也可以通过色彩偏移做出更多效果。",
+      "sourceKey": "sample-description.11-grdn-posr2",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "04_GRD_PosR2_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-947c87a9083f7c28fac6a0e7b9c94f9f"
+        },
+        {
+          "assetName": "04_GRD_PosR2_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-947c87a9083f7c28fac6a0e7b9c94f9f"
+        },
+        {
+          "assetName": "04_GRD_PosR2_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-947c87a9083f7c28fac6a0e7b9c94f9f"
+        },
+        {
+          "assetName": "04_GRD_PosR2_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-947c87a9083f7c28fac6a0e7b9c94f9f"
+        },
+        {
+          "assetName": "04_GRD_PosR2_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-947c87a9083f7c28fac6a0e7b9c94f9f"
+        },
+        {
+          "assetName": "04_GRD_PosR2_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-947c87a9083f7c28fac6a0e7b9c94f9f"
+        }
+      ]
+    },
+    {
+      "id": "04_T3_5205E",
+      "family": "T3",
+      "label": "5205E",
+      "presetIds": [
+        "T3_5205E"
+      ],
+      "description": "灵感来源于EVO药水冲扫的5205过期底片，颜色复古，会带有过期的特性，像老电影。",
+      "sourceKey": "sample-description.08-t3n-5205e",
+      "expectedCount": 6,
+      "images": [
+        {
+          "assetName": "04_T3_5205E_06",
+          "src": "samples/04_T3_5205E_06.png",
+          "thumb": "samples/04_T3_5205E_06.webp",
+          "width": 1380,
+          "height": 2071,
+          "sha256": "b6eac405d019fd90cf56bf6d28750b9f2f942085ff01799e011c48e8a6e71e40"
+        }
+      ],
+      "missing": [
+        {
+          "assetName": "04_T3_5205E_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-02d30ba55d2f1f18088dac9724a3f6bf"
+        },
+        {
+          "assetName": "04_T3_5205E_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-02d30ba55d2f1f18088dac9724a3f6bf"
+        },
+        {
+          "assetName": "04_T3_5205E_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-02d30ba55d2f1f18088dac9724a3f6bf"
+        },
+        {
+          "assetName": "04_T3_5205E_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-02d30ba55d2f1f18088dac9724a3f6bf"
+        },
+        {
+          "assetName": "04_T3_5205E_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-02d30ba55d2f1f18088dac9724a3f6bf"
+        }
+      ]
+    },
+    {
+      "id": "05_CCD12_BLUE",
+      "family": "G12",
+      "label": "风景",
+      "presetIds": [
+        "CCD12_BLUE"
+      ],
+      "description": "基于G12的鲜艳模式，颜色饱满像油画，对于风景拍摄有非常好的效果。",
+      "sourceKey": "sample-description.13-g12n-blue",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "05_CCD12_BLUE_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ab65d0186e25976e1c326dab84c80cb3"
+        },
+        {
+          "assetName": "05_CCD12_BLUE_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ab65d0186e25976e1c326dab84c80cb3"
+        },
+        {
+          "assetName": "05_CCD12_BLUE_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ab65d0186e25976e1c326dab84c80cb3"
+        },
+        {
+          "assetName": "05_CCD12_BLUE_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ab65d0186e25976e1c326dab84c80cb3"
+        },
+        {
+          "assetName": "05_CCD12_BLUE_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ab65d0186e25976e1c326dab84c80cb3"
+        },
+        {
+          "assetName": "05_CCD12_BLUE_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ab65d0186e25976e1c326dab84c80cb3"
+        }
+      ]
+    },
+    {
+      "id": "05_CCD12_SKIN",
+      "family": "G12",
+      "label": "自然",
+      "presetIds": [
+        "CCD12_SKIN"
+      ],
+      "description": "基于G12的减淡肤色模式，颜色自然油润。",
+      "sourceKey": "sample-description.13-g12n-skin",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "05_CCD12_SKIN_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-5283c3265a9c332df86a07dbeae4cd62"
+        },
+        {
+          "assetName": "05_CCD12_SKIN_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-5283c3265a9c332df86a07dbeae4cd62"
+        },
+        {
+          "assetName": "05_CCD12_SKIN_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-5283c3265a9c332df86a07dbeae4cd62"
+        },
+        {
+          "assetName": "05_CCD12_SKIN_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-5283c3265a9c332df86a07dbeae4cd62"
+        },
+        {
+          "assetName": "05_CCD12_SKIN_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-5283c3265a9c332df86a07dbeae4cd62"
+        },
+        {
+          "assetName": "05_CCD12_SKIN_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-5283c3265a9c332df86a07dbeae4cd62"
+        }
+      ]
+    },
+    {
+      "id": "05_CCD12_STD",
+      "family": "G12",
+      "label": "经典",
+      "presetIds": [
+        "CCD12_STD"
+      ],
+      "description": "基于G12的标准模式，经典的CCD色彩。",
+      "sourceKey": "sample-description.13-g12n-std",
+      "expectedCount": 4,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "05_CCD12_STD_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ecae21201f7e49960a23758afe5131d"
+        },
+        {
+          "assetName": "05_CCD12_STD_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ecae21201f7e49960a23758afe5131d"
+        },
+        {
+          "assetName": "05_CCD12_STD_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ecae21201f7e49960a23758afe5131d"
+        },
+        {
+          "assetName": "05_CCD12_STD_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0ecae21201f7e49960a23758afe5131d"
+        }
+      ]
+    },
+    {
+      "id": "05_GRD_NOMO",
+      "family": "GRD",
+      "label": "单色",
+      "presetIds": [
+        "GRD_NOMO"
+      ],
+      "description": "经典的黑白单色，影调灰阶柔顺。",
+      "sourceKey": "sample-description.11-grdn-nomo",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "05_GRD_NOMO_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-19b2e0887cb16bc17069f9b7ce763e63"
+        },
+        {
+          "assetName": "05_GRD_NOMO_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-19b2e0887cb16bc17069f9b7ce763e63"
+        },
+        {
+          "assetName": "05_GRD_NOMO_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-19b2e0887cb16bc17069f9b7ce763e63"
+        },
+        {
+          "assetName": "05_GRD_NOMO_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-19b2e0887cb16bc17069f9b7ce763e63"
+        },
+        {
+          "assetName": "05_GRD_NOMO_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-19b2e0887cb16bc17069f9b7ce763e63"
+        },
+        {
+          "assetName": "05_GRD_NOMO_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-19b2e0887cb16bc17069f9b7ce763e63"
+        }
+      ]
+    },
+    {
+      "id": "05_T3_8552E",
+      "family": "T3",
+      "label": "8552E",
+      "presetIds": [
+        "T3_8552"
+      ],
+      "description": "灵感来源于EVO药水冲扫的F250T绝版电影卷，因为过期许久，颜色会更复古浓郁，带有过期特性。",
+      "sourceKey": "sample-description.08-t3n-8552e",
+      "expectedCount": 4,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "05_T3_8552E_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6d80f5606961356906908a59e0ed8aac"
+        },
+        {
+          "assetName": "05_T3_8552E_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6d80f5606961356906908a59e0ed8aac"
+        },
+        {
+          "assetName": "05_T3_8552E_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6d80f5606961356906908a59e0ed8aac"
+        },
+        {
+          "assetName": "05_T3_8552E_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-6d80f5606961356906908a59e0ed8aac"
+        }
+      ]
+    },
+    {
+      "id": "06_GHALF_250D",
+      "family": "G-HALF",
+      "label": "250D",
+      "presetIds": [
+        "GHALF_5207"
+      ],
+      "description": "灵感来源于5207日光电影负片，经过二次调色，呈现柔和的氛围。",
+      "sourceKey": "sample-description.10-ghalfn-250d",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "06_GHALF_250D_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-03192a11a7a41a72931bf29dfc51a444"
+        },
+        {
+          "assetName": "06_GHALF_250D_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-03192a11a7a41a72931bf29dfc51a444"
+        },
+        {
+          "assetName": "06_GHALF_250D_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-03192a11a7a41a72931bf29dfc51a444"
+        },
+        {
+          "assetName": "06_GHALF_250D_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-03192a11a7a41a72931bf29dfc51a444"
+        },
+        {
+          "assetName": "06_GHALF_250D_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-03192a11a7a41a72931bf29dfc51a444"
+        },
+        {
+          "assetName": "06_GHALF_250D_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-03192a11a7a41a72931bf29dfc51a444"
+        }
+      ]
+    },
+    {
+      "id": "06_GHALF_500T",
+      "family": "G-HALF",
+      "label": "500T",
+      "presetIds": [
+        "GHALF_500T"
+      ],
+      "description": "灵感来源于5219钨丝灯电影负片，颜色会淡淡发蓝稍微厚重，适合夜景拍摄，高光可能会出现红色光晕。",
+      "sourceKey": "sample-description.10-ghalfn-500t",
+      "expectedCount": 6,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "06_GHALF_500T_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3f491723aec76421e37fa4dab7e10368"
+        },
+        {
+          "assetName": "06_GHALF_500T_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3f491723aec76421e37fa4dab7e10368"
+        },
+        {
+          "assetName": "06_GHALF_500T_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3f491723aec76421e37fa4dab7e10368"
+        },
+        {
+          "assetName": "06_GHALF_500T_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3f491723aec76421e37fa4dab7e10368"
+        },
+        {
+          "assetName": "06_GHALF_500T_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3f491723aec76421e37fa4dab7e10368"
+        },
+        {
+          "assetName": "06_GHALF_500T_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-3f491723aec76421e37fa4dab7e10368"
+        }
+      ]
+    },
+    {
+      "id": "06_GHALF_50D",
+      "family": "G-HALF",
+      "label": "50D",
+      "presetIds": [
+        "GHALF_50D"
+      ],
+      "description": "灵感来源5203日光电影负片，颜色淡雅，适合日常记录。",
+      "sourceKey": "sample-description.10-ghalfn-50d",
+      "expectedCount": 8,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "06_GHALF_50D_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0e40ac3b42b34a7b964b0662c07b6cd3"
+        },
+        {
+          "assetName": "06_GHALF_50D_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0e40ac3b42b34a7b964b0662c07b6cd3"
+        },
+        {
+          "assetName": "06_GHALF_50D_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0e40ac3b42b34a7b964b0662c07b6cd3"
+        },
+        {
+          "assetName": "06_GHALF_50D_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0e40ac3b42b34a7b964b0662c07b6cd3"
+        },
+        {
+          "assetName": "06_GHALF_50D_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0e40ac3b42b34a7b964b0662c07b6cd3"
+        },
+        {
+          "assetName": "06_GHALF_50D_06",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0e40ac3b42b34a7b964b0662c07b6cd3"
+        },
+        {
+          "assetName": "06_GHALF_50D_07",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0e40ac3b42b34a7b964b0662c07b6cd3"
+        },
+        {
+          "assetName": "06_GHALF_50D_08",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-0e40ac3b42b34a7b964b0662c07b6cd3"
+        }
+      ]
+    },
+    {
+      "id": "06_T3_400TX",
+      "family": "T3",
+      "label": "TX400",
+      "presetIds": [
+        "T3_TX400"
+      ],
+      "description": "灵感来源于400TX黑白负片，颗粒质感明显。",
+      "sourceKey": "sample-description.08-t3n-400tx",
+      "expectedCount": 4,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "06_T3_400TX_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-13c1a4a69c927325aa6efe84a95abfbd"
+        },
+        {
+          "assetName": "06_T3_400TX_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-13c1a4a69c927325aa6efe84a95abfbd"
+        },
+        {
+          "assetName": "06_T3_400TX_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-13c1a4a69c927325aa6efe84a95abfbd"
+        },
+        {
+          "assetName": "06_T3_400TX_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-13c1a4a69c927325aa6efe84a95abfbd"
+        }
+      ]
+    },
+    {
+      "id": "07_CCD2008_STD",
+      "family": "CCD2008",
+      "label": "R-51",
+      "presetIds": [
+        "CCD2008_STD"
+      ],
+      "description": "灵感来源于R-51，千禧年的古早CCD柔和颜色，饱和度适中，不过画质不算特别清晰。",
+      "sourceKey": "sample-description.07-ccd2008-std",
+      "expectedCount": 5,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "07_CCD2008_STD_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-d8a39fba44ba973161b53c1b5847f059"
+        },
+        {
+          "assetName": "07_CCD2008_STD_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-d8a39fba44ba973161b53c1b5847f059"
+        },
+        {
+          "assetName": "07_CCD2008_STD_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-d8a39fba44ba973161b53c1b5847f059"
+        },
+        {
+          "assetName": "07_CCD2008_STD_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-d8a39fba44ba973161b53c1b5847f059"
+        },
+        {
+          "assetName": "07_CCD2008_STD_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-d8a39fba44ba973161b53c1b5847f059"
+        }
+      ]
+    },
+    {
+      "id": "07_CCD2008_Z110",
+      "family": "CCD2008",
+      "label": "Z110",
+      "presetIds": [
+        "CCD2008_Z110"
+      ],
+      "description": "灵感来源于 CCD 相机 Z110，低对比度搭配柔和的奶黄色调，呈现温润、轻盈的画面氛围。",
+      "sourceKey": "sample-description.07-ccd2008-z110",
+      "expectedCount": 5,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "07_CCD2008_Z110_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-a41798a8041d82146bd6015f815d12b3"
+        },
+        {
+          "assetName": "07_CCD2008_Z110_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-a41798a8041d82146bd6015f815d12b3"
+        },
+        {
+          "assetName": "07_CCD2008_Z110_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-a41798a8041d82146bd6015f815d12b3"
+        },
+        {
+          "assetName": "07_CCD2008_Z110_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-a41798a8041d82146bd6015f815d12b3"
+        },
+        {
+          "assetName": "07_CCD2008_Z110_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-a41798a8041d82146bd6015f815d12b3"
+        }
+      ]
+    },
+    {
+      "id": "07_T3_PR400L",
+      "family": "T3",
+      "label": "PR400L",
+      "presetIds": [
+        "T3_PR400"
+      ],
+      "description": "灵感来源于LUNA药水冲扫的PREMIUM400负片，颜色复古，在阴天也有良好表现。",
+      "sourceKey": "sample-description.08-t3n-pr400l",
+      "expectedCount": 4,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "07_T3_PR400L_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ce4de43dfc32a03d9ef09e41c064821a"
+        },
+        {
+          "assetName": "07_T3_PR400L_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ce4de43dfc32a03d9ef09e41c064821a"
+        },
+        {
+          "assetName": "07_T3_PR400L_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ce4de43dfc32a03d9ef09e41c064821a"
+        },
+        {
+          "assetName": "07_T3_PR400L_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-ce4de43dfc32a03d9ef09e41c064821a"
+        }
+      ]
+    },
+    {
+      "id": "09_M72_250D",
+      "family": "M72",
+      "label": "250D",
+      "presetIds": [
+        "M72_250D"
+      ],
+      "description": "灵感源自 IMAX 版本的 250D 日光电影胶片。色彩自然柔和，饱和度适中，在不同光线与拍摄场景下都能呈现稳定、耐看的效果。",
+      "sourceKey": "sample-description.09-m72-250d",
+      "expectedCount": 5,
+      "images": [],
+      "missing": [
+        {
+          "assetName": "09_M72_250D_01",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-60dfe23ac4607d224b558c0cf08eabf1"
+        },
+        {
+          "assetName": "09_M72_250D_02",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-60dfe23ac4607d224b558c0cf08eabf1"
+        },
+        {
+          "assetName": "09_M72_250D_03",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-60dfe23ac4607d224b558c0cf08eabf1"
+        },
+        {
+          "assetName": "09_M72_250D_04",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-60dfe23ac4607d224b558c0cf08eabf1"
+        },
+        {
+          "assetName": "09_M72_250D_05",
+          "assetType": "ExternalLink",
+          "assetPack": "com.fanyingze.gloamcam.asset-pack-60dfe23ac4607d224b558c0cf08eabf1"
+        }
+      ]
+    }
+  ]
+}

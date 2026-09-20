@@ -1,0 +1,79 @@
+[
+  {
+    "file": "aberration.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "058f05ba03c3da7a2ac64bd6c0898ffa9b7ca4aaa28fb94a47ae9dc1eb00e9bc"
+  },
+  {
+    "file": "amount.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "19308afc49dfbbc535975823250c6955ab36a9977592f5402cf9b8424d3ab39a"
+  },
+  {
+    "file": "bloom.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "cce585102106342ccc85caa1307044883294b2f07b74cf0498f478cbfe064103"
+  },
+  {
+    "file": "caPixels.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "742985d41159b7efb0d1586f1ee30c4814c88b4eb64ae5a8083bee9bdea27712"
+  },
+  {
+    "file": "ccd.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "caa62e1443126e0259668c4b799002fc5dc97512cd65e74b6af34c5e8377545b"
+  },
+  {
+    "file": "exposure.png",
+    "origin": "original-app-asset",
+    "originalAssetName": "ExposureSolidSun",
+    "source": "asset-previews/ExposureSolidSun.png",
+    "sha256": "b54d16638e9780d1860c79c34094a1bf0dc5798f762937f88e967993736e023b"
+  },
+  {
+    "file": "grain.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "d1480ec83ae726fa02f4b90e6b253b0351795b88cfaf83a6e5e43ec8911adcb8"
+  },
+  {
+    "file": "halation.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "88b4252d295d5010ec8ff0ec219484fae465f720a8fb7c13d01e4ed7f4d91753"
+  },
+  {
+    "file": "node.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "d5e68596beacdcae7d4c978af18b50658c1c22d5d855c3b8ae09544d2708ace7"
+  },
+  {
+    "file": "temperature.png",
+    "origin": "original-app-asset",
+    "originalAssetName": "WhiteBalanceThermometer",
+    "source": "asset-previews/WhiteBalanceThermometer.png",
+    "sha256": "55cc24a4281cb94afbf4c81844ce2c6d1937777f3fdd67c134c889bbf521cad2"
+  },
+  {
+    "file": "vignette.svg",
+    "origin": "local-illustration",
+    "originalAssetName": null,
+    "source": "Locally drawn SVG, not recovered from Gloam",
+    "sha256": "3028772f5489c5bbcf9b3dee27c32309485a96f73e8b3eb78fd0fbf0b1d541cd"
+  }
+]
