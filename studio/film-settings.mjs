@@ -1,7 +1,7 @@
-import {R51_ID,r51Defaults} from './r51-profiles.mjs?v=20260921-live-measured-1';
-import {EDIT_DEFAULTS} from './editor-settings.mjs?v=20260921-live-measured-1';
-import {FINISH_DEFAULTS} from './finish.mjs?v=20260921-live-measured-1';
-import {measured5219Defaults,MEASURED_5219_ID,MEASURED_5219_VERSION} from './measured-5219.mjs?v=20260921-live-measured-1';
+import {R51_ID,r51Defaults} from './r51-profiles.mjs?v=20260921-live-lite-2';
+import {EDIT_DEFAULTS} from './editor-settings.mjs?v=20260921-live-lite-2';
+import {FINISH_DEFAULTS} from './finish.mjs?v=20260921-live-lite-2';
+import {measured5219Defaults,MEASURED_5219_ID,MEASURED_5219_VERSION} from './measured-5219.mjs?v=20260921-live-lite-2';
 
 const prefix='gloam.film-settings.v1.';
 const memory=new Map();

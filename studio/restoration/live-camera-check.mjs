@@ -1,8 +1,8 @@
-import {LiveCamera} from '../live-camera.mjs?v=20260921-live-measured-1';
-import {Renderer} from '../renderer.mjs?v=20260921-live-measured-1';
-import {finishImage} from '../finish.mjs?v=20260921-live-measured-1';
-import {r51Settings} from '../r51-profiles.mjs?v=20260921-live-measured-1';
-import {defaultFilmSettings} from '../film-settings.mjs?v=20260921-live-measured-1';
+import {LiveCamera} from '../live-camera.mjs?v=20260921-live-lite-2';
+import {Renderer} from '../renderer.mjs?v=20260921-live-lite-2';
+import {finishImage} from '../finish.mjs?v=20260921-live-lite-2';
+import {r51Settings} from '../r51-profiles.mjs?v=20260921-live-lite-2';
+import {defaultFilmSettings} from '../film-settings.mjs?v=20260921-live-lite-2';
 const results=[],check=(name,ok,detail)=>{results.push({name,ok:!!ok,detail});if(!ok)throw Error(name);};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const until=async fn=>{for(let i=0;i<150;i++){if(fn())return;await sleep(100);}throw Error('Timed out');};
@@ -21,7 +21,7 @@ try{
  const pending=session.start();session.stop();const late=feed.captureStream(15);resolveLate(late);
  check('Stop while permission pending ends late stream',!await pending&&late.getTracks().every(t=>t.readyState==='ended'));
  const streams=[];session.mediaDevices={getUserMedia:async c=>{constraints=c;const s=feed.captureStream(15);streams.push(s);return s;}};
- check('Synthetic stream starts',await session.start());
+ session.previewMode='full';check('Synthetic stream starts',await session.start());
  await until(()=>Number(canvas.dataset.frames)>2);
  check('Video only, no microphone',constraints.audio===false&&constraints.video.facingMode.ideal==='environment');
  const pixels=()=>Array.from(canvas.getContext('2d').getImageData(20,20,1,1).data);
@@ -41,6 +41,13 @@ try{
   const bitmap=await createImageBitmap(captured.blob),c=document.createElement('canvas');c.width=bitmap.width;c.height=bitmap.height;c.getContext('2d').drawImage(bitmap,0,0);bitmap.close();
   check(id+' '+mode+' saved PNG equals static renderer',equal(copyPixels(c),expected));
  }
+ preset=films.find(p=>p.id==='CCD2008_STD');settings=defaultFilmSettings(preset);await session.refresh();session.previewMode='color';
+ let fastPasses=0;const originalPass=session.renderer.pass.bind(session.renderer);session.renderer.pass=(...args)=>{fastPasses++;return originalPass(...args)};session.draw();session.renderer.pass=originalPass;
+ check('Color preview uses one GPU pass',fastPasses===1,fastPasses);
+ check('Upload source is preview-sized',session.renderer.lastImages.source.width===320&&session.renderer.lastImages.source.height===240);
+ const cheapPreview=copyPixels(canvas),cheapShot=await session.capture(),bitmap=await createImageBitmap(cheapShot.blob),shotCanvas=document.createElement('canvas');shotCanvas.width=bitmap.width;shotCanvas.height=bitmap.height;shotCanvas.getContext('2d').drawImage(bitmap,0,0);bitmap.close();
+ const frozenSource=session.source(320,240,true);offline.lastImages.source=null;offline.render(frozenSource,session.prepared,settings,320,240,[320,240]);const fullPixels=copyPixels(finishImage(offline.canvas,settings));
+ check('Color mode still captures full recipe',equal(copyPixels(shotCanvas),fullPixels));check('Color preview is explicitly reduced',!equal(cheapPreview,fullPixels));session.previewMode='full';
  session.previewSize=0;session.autoSize=720;session.drawTime=100;session.qualityChanged=performance.now()-4000;session.metrics();check('Slow automatic preview steps down',session.autoSize===480);
  const previousSize=session.autoSize;session.metrics();check('Adaptive quality has hysteresis',session.autoSize===previousSize);
 

@@ -1,5 +1,5 @@
-import {Renderer,Assets} from './renderer.mjs?v=20260921-live-measured-1';
-import {finishImage,prepareFinish} from './finish.mjs?v=20260921-live-measured-1';
+import {Renderer,Assets} from './renderer.mjs?v=20260921-live-lite-2';
+import {finishImage,prepareFinish} from './finish.mjs?v=20260921-live-lite-2';
 
 // A separate renderer keeps moving video textures out of the photo renderer cache.
 export function mountVideo({manifest,getPreset,getSettings}) {

@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Gloam · 实时拍摄</title><link rel="icon" href="studio/homepage/favicon.svg"><link rel="stylesheet" href="studio/camera.css?v=20260921-live-measured-1"></head><body>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Gloam · 实时拍摄</title><link rel="icon" href="studio/homepage/favicon.svg"><link rel="stylesheet" href="studio/camera.css?v=20260921-live-lite-2"></head><body>
 <header><a href="index.html">‹ 胶片试片室</a><strong>gloam <small>实时拍摄</small></strong><button id="camera-stop" disabled>关闭镜头</button></header>
 <main><section class="viewfinder"><video id="camera-source" muted playsinline hidden></video><canvas id="camera-result" width="1" height="1" aria-label="实时滤镜预览"></canvas><div id="camera-placeholder"><span class="camera-mark">g.</span><h1>把胶片带进眼前。</h1><p>选择一款胶片，开启摄像头。</p><button id="camera-start" class="primary" disabled>开启摄像头</button></div><span id="live-label" hidden>LIVE · 本机处理</span></section>
 <section class="camera-controls" aria-label="拍摄设置"><div id="camera-security" role="note" hidden>手机实时摄像头需要 HTTPS。当前局域网 HTTP 入口不能启用镜头；你仍可返回试片室导入照片。</div>
@@ -7,9 +7,10 @@
 <div class="selection"><label>相机<select id="camera-family" disabled></select></label><label>胶片<select id="camera-film" disabled></select></label></div>
 <section id="camera-recipe" hidden><label id="camera-r51-field">R-51 配方<select id="camera-r51-profile"><option value="noflash">无闪实测</option><option value="flash">有闪实测（后期配方）</option></select></label><p id="camera-recipe-note"></p><button id="camera-recipe-reset">使用实测默认值</button></section>
 <p id="camera-performance" aria-live="off"></p>
-<div class="options"><button id="camera-flip" disabled>切换前置</button><label><input id="camera-mirror" type="checkbox">镜像画面与成片</label><label>预览<select id="camera-quality"><option value="0">自动省电（推荐）</option><option value="480">流畅 480</option><option value="720">标准 720</option><option value="960">清晰 960</option></select></label></div>
+<label class="preview-mode">取景模式<select id="camera-preview-mode"><option value="color">省电颜色预览（推荐）</option><option value="full">完整效果预览（较慢）</option></select></label><p class="note preview-note">省电模式显示颜色；颗粒、色散、蓝紫边和光晕等在拍照时完整计算。</p>
+<div class="options"><button id="camera-flip" disabled>切换前置</button><label><input id="camera-mirror" type="checkbox">镜像画面与成片</label><label>预览<select id="camera-quality"><option value="0">自动省电 360</option><option value="480">流畅 480</option><option value="720">标准 720</option><option value="960">清晰 960</option></select></label></div>
 <label class="slider">滤镜强度 <output id="camera-amount-value">100%</output><input id="camera-amount" type="range" min="0" max="100" value="100"></label>
 <div class="capture-row"><a id="camera-edit" href="editor.html">更多胶片参数 ↗</a><button id="camera-shutter" class="shutter" aria-label="拍照" disabled><span></span></button><span id="camera-size">等待镜头</span></div>
 <section id="camera-shot" hidden aria-label="最新拍摄照片"><img id="camera-shot-image" alt="最新拍摄的滤镜照片"><div><p id="camera-shot-info"></p><a id="camera-download" class="primary" download="Gloam.png">保存照片</a><button id="camera-share" hidden>分享／存储</button></div></section>
 <p class="note">复用当前胶片的本机设置。实时拍摄为单画面，暂不使用半格拼图。照片尺寸取决于浏览器提供的摄像头画面；不包含 RAW 或原生相机的高像素拍摄。</p></section></main>
-<script type="module" src="studio/camera-page.mjs?v=20260921-live-measured-1"></script></body></html>
+<script type="module" src="studio/camera-page.mjs?v=20260921-live-lite-2"></script></body></html>

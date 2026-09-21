@@ -1,9 +1,10 @@
-import {R51_ID,R51_PROFILES} from './r51-profiles.mjs?v=20260921-live-measured-1';
-import {installR51,renderR51} from './r51-render.mjs?v=20260921-live-measured-1';
-import {MEASURED_5219_ID} from './measured-5219.mjs?v=20260921-live-measured-1';
-import {EXTENDED_DEFAULTS,installExtended,extendedTone,extendedFringe,textureGLSL,ccdRadialGLSL} from './extended-effects.mjs?v=20260921-live-measured-1';
-import {installDevelop,preDevelop,postDevelop,opticalDevelop} from './develop.mjs?v=20260921-live-measured-1';
-import {CCD_RECIPE,coordinates,ccdKernel,aberrationKernel} from './optics.mjs?v=20260921-live-measured-1';
+import {installColorPreview} from './preview-color.mjs?v=20260921-live-lite-2';
+import {R51_ID,R51_PROFILES} from './r51-profiles.mjs?v=20260921-live-lite-2';
+import {installR51,renderR51} from './r51-render.mjs?v=20260921-live-lite-2';
+import {MEASURED_5219_ID} from './measured-5219.mjs?v=20260921-live-lite-2';
+import {EXTENDED_DEFAULTS,installExtended,extendedTone,extendedFringe,textureGLSL,ccdRadialGLSL} from './extended-effects.mjs?v=20260921-live-lite-2';
+import {installDevelop,preDevelop,postDevelop,opticalDevelop} from './develop.mjs?v=20260921-live-lite-2';
+import {CCD_RECIPE,coordinates,ccdKernel,aberrationKernel} from './optics.mjs?v=20260921-live-lite-2';
 // Event-driven WebGL2 renderer. Recipes are local approximations; see manifest and docs.
 export class Renderer {
  constructor(canvas) {
@@ -61,6 +62,7 @@ export class Renderer {
     color=vec4(mix(original,clamp(c,0.,1.),amount),1.);
    }`);
   installDevelop(this,vertex,prefix);installExtended(this,vertex,prefix);
+  this.ensureColorPreview=()=>{if(!this.programs.colorPreview)installColorPreview(this,vertex,prefix);};
   this.ensureR51=()=>{if(!this.programs.r51Output)installR51(this,vertex,prefix);};
   this.source=this.texture();this.grain=this.texture(true);this.vignette=this.texture();this.shadow=this.texture();this.lut=g.createTexture();this.lastImages={};this.lastTable=null;
  }
@@ -69,11 +71,12 @@ export class Renderer {
  image(key,texture,img){if(!img||this.lastImages[key]===img)return;const g=this.gl;g.activeTexture(g.TEXTURE0);g.bindTexture(g.TEXTURE_2D,texture);g.pixelStorei(g.UNPACK_FLIP_Y_WEBGL,true);g.pixelStorei(g.UNPACK_COLORSPACE_CONVERSION_WEBGL,g.NONE);g.texImage2D(g.TEXTURE_2D,0,g.RGBA,g.RGBA,g.UNSIGNED_BYTE,img);if(key==='grain'){g.generateMipmap(g.TEXTURE_2D);g.texParameteri(g.TEXTURE_2D,g.TEXTURE_MIN_FILTER,g.LINEAR_MIPMAP_LINEAR);}g.pixelStorei(g.UNPACK_FLIP_Y_WEBGL,false);this.lastImages[key]=img;}
  frame(index,w,h){const g=this.gl;let f=this.frames[index];if(!f){f=this.frames[index]={texture:this.texture(),buffer:g.createFramebuffer()};}if(f.w!==w||f.h!==h){g.activeTexture(g.TEXTURE0);g.bindTexture(g.TEXTURE_2D,f.texture);g.texImage2D(g.TEXTURE_2D,0,index>=30&&this.floatOptics?g.RGBA16F:g.RGBA,w,h,0,g.RGBA,index>=30&&this.floatOptics?g.HALF_FLOAT:g.UNSIGNED_BYTE,null);g.bindFramebuffer(g.FRAMEBUFFER,f.buffer);g.framebufferTexture2D(g.FRAMEBUFFER,g.COLOR_ATTACHMENT0,g.TEXTURE_2D,f.texture,0);if(g.checkFramebufferStatus(g.FRAMEBUFFER)!==g.FRAMEBUFFER_COMPLETE)throw Error('GPU framebuffer 分配失败');f.w=w;f.h=h;}return f;}
  pass(name,frame,w,h,textures,uniforms={}){const g=this.gl,p=this.programs[name];g.useProgram(p);g.bindFramebuffer(g.FRAMEBUFFER,frame?.buffer||null);g.viewport(0,0,w,h);let i=0;for(const [name,t] of Object.entries(textures)){g.activeTexture(g.TEXTURE0+i);g.bindTexture(name==='lut'?g.TEXTURE_3D:g.TEXTURE_2D,t);g.uniform1i(g.getUniformLocation(p,name),i++);}for(const [name,v] of Object.entries(uniforms)){const loc=g.getUniformLocation(p,name);if(Array.isArray(v)){if(v.length===3)g.uniform3fv(loc,v);else g.uniform2fv(loc,v);}else if(name==='size')g.uniform1i(loc,v);else g.uniform1f(loc,v);}g.drawArrays(g.TRIANGLES,0,3);}
- render(image,prepared,settings,width,height,originalSize){
+ render(image,prepared,settings,width,height,originalSize,options={}){
   settings={...EXTENDED_DEFAULTS,...settings,measured5219:prepared.presetId===MEASURED_5219_ID&&settings.measured5219===1?1:0};
-  const g=this.gl;if(width>this.maxSize||height>this.maxSize)throw Error(`图片超过 GPU 最大尺寸 ${this.maxSize}`);this.canvas.width=width;this.canvas.height=height;
-  this.image('source',this.source,image);this.image('grain',this.grain,prepared.grain);this.image('vignette',this.vignette,prepared.vignette);this.image('shadow',this.shadow,prepared.shadow);
+  const g=this.gl;if(width>this.maxSize||height>this.maxSize)throw Error(`图片超过 GPU 最大尺寸 ${this.maxSize}`);if(this.canvas.width!==width)this.canvas.width=width;if(this.canvas.height!==height)this.canvas.height=height;
+  this.image('source',this.source,image);if(!options.colorPreview){this.image('grain',this.grain,prepared.grain);this.image('vignette',this.vignette,prepared.vignette);this.image('shadow',this.shadow,prepared.shadow);}
   if(this.lastTable!==prepared.table){g.activeTexture(g.TEXTURE0);g.bindTexture(g.TEXTURE_3D,this.lut);g.pixelStorei(g.UNPACK_ALIGNMENT,1);g.texImage3D(g.TEXTURE_3D,0,g.RGB32F,prepared.size,prepared.size,prepared.size,0,g.RGB,g.FLOAT,prepared.table);for(const p of [g.TEXTURE_MIN_FILTER,g.TEXTURE_MAG_FILTER])g.texParameteri(g.TEXTURE_3D,p,g.NEAREST);this.lastTable=prepared.table;}
+  if(options.colorPreview){this.ensureColorPreview();this.pass('colorPreview',null,width,height,{source:this.source,lut:this.lut},{size:prepared.size,exposure:settings.exposure||0,amount:settings.amount??1});const err=g.getError();if(err!==g.NO_ERROR)throw Error('颜色预览 GPU 错误 '+err);return this.canvas;}
   if(prepared.presetId===R51_ID&&Object.hasOwn(R51_PROFILES,settings.r51Profile))return renderR51(this,prepared,settings,width,height);
   const a=this.frame(0,width,height);const ratio=Math.min(1,440/Math.max(width,height)),bw=Math.max(1,Math.round(width*ratio)),bh=Math.max(1,Math.round(height*ratio));const b=this.frame(1,bw,bh),c=this.frame(2,bw,bh),d=this.frame(3,bw,bh),micro=this.frame(4,bw,bh);
   // Fix spatial scale across preview/export; original preset resolution policy is still unknown.

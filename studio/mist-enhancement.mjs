@@ -1,4 +1,4 @@
-import {MIST_PRESETS} from './mist-presets.mjs?v=20260921-live-measured-1';
+import {MIST_PRESETS} from './mist-presets.mjs?v=20260921-live-lite-2';
 /** Local visibility tuning, not recovered Gloam parameters. Zero preserves the recovered baseline. */
 export function mistProfile(grade,boost=0){
  const base=MIST_PRESETS[Math.min(5,Math.max(0,Math.round(grade)-1))];

@@ -1,8 +1,8 @@
-import {R51_ID,r51Settings,R51_NOTE} from './r51-profiles.mjs?v=20260921-live-measured-1';
-import {MEASURED_5219_ID,MEASURED_5219_NOTE} from './measured-5219.mjs?v=20260921-live-measured-1';
-import {mountDateUI} from './date-ui.mjs?v=20260921-live-measured-1';
-import {EDIT_CONTROLS,MIST_LABELS,HALATION_LABELS} from './editor-settings.mjs?v=20260921-live-measured-1';
-import {FINISH_OPTIONS} from './finish.mjs?v=20260921-live-measured-1';
+import {R51_ID,r51Settings,R51_NOTE} from './r51-profiles.mjs?v=20260921-live-lite-2';
+import {MEASURED_5219_ID,MEASURED_5219_NOTE} from './measured-5219.mjs?v=20260921-live-lite-2';
+import {mountDateUI} from './date-ui.mjs?v=20260921-live-lite-2';
+import {EDIT_CONTROLS,MIST_LABELS,HALATION_LABELS} from './editor-settings.mjs?v=20260921-live-lite-2';
+import {FINISH_OPTIONS} from './finish.mjs?v=20260921-live-lite-2';
 const $=s=>document.querySelector(s);
 export const CONTROL_KEYS=['amount','exposure','grain','blackMistGrade','blackMistBoost','halationGrade','vignette','ccd','aberration','caPixels','node','kelvin',...EDIT_CONTROLS.map(x=>x[0])];
 export function divisor(key){if(key==='blackMistGrade'||key==='halationGrade'||key==='kelvin')return 1;if(key==='node'||key==='caPixels')return 10;return 100;}

@@ -1,10 +1,10 @@
 // Recovered CI kernels + captured parameters. Pass order, blur, texture placement,
 // curve interpolation and grainStrength mapping are browser approximations; see restoration/r51-measured/README.md.
-import {R51_PROFILES} from './r51-profiles.mjs?v=20260921-live-measured-1';
-import {coordinates,aberrationKernel} from './optics.mjs?v=20260921-live-measured-1';
-import {highlightShoulder,fringeSeed,fringeComposite,grainOriginal,vignetteResponse} from './extended-kernels.mjs?v=20260921-live-measured-1';
-import {preDevelop,postDevelop,opticalDevelop} from './develop.mjs?v=20260921-live-measured-1';
-import {extendedTone} from './extended-effects.mjs?v=20260921-live-measured-1';
+import {R51_PROFILES} from './r51-profiles.mjs?v=20260921-live-lite-2';
+import {coordinates,aberrationKernel} from './optics.mjs?v=20260921-live-lite-2';
+import {highlightShoulder,fringeSeed,fringeComposite,grainOriginal,vignetteResponse} from './extended-kernels.mjs?v=20260921-live-lite-2';
+import {preDevelop,postDevelop,opticalDevelop} from './develop.mjs?v=20260921-live-lite-2';
+import {extendedTone} from './extended-effects.mjs?v=20260921-live-lite-2';
 export function installR51(r,vertex,prefix){
  const add=(name,body)=>r.programs[name]=r.program(vertex,prefix+body);
  add('r51CA',coordinates+aberrationKernel+`uniform sampler2D source;uniform float intensity;void main(){color=rgbChromaticAberration(source,referenceSize*.5,-.4732142857142918,0.,-4.0703125,intensity,length(referenceSize*.5),3.,0.,0.,.67,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.,1.);}`);

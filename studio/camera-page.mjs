@@ -1,7 +1,7 @@
-import {R51_ID,r51Settings,r51Name} from './r51-profiles.mjs?v=20260921-live-measured-1';
-import {MEASURED_5219_ID} from './measured-5219.mjs?v=20260921-live-measured-1';
-import {LiveCamera} from './live-camera.mjs?v=20260921-live-measured-1';
-import {defaultFilmSettings,readFilmSettings,saveFilmSettings} from './film-settings.mjs?v=20260921-live-measured-1';
+import {R51_ID,r51Settings,r51Name} from './r51-profiles.mjs?v=20260921-live-lite-2';
+import {MEASURED_5219_ID} from './measured-5219.mjs?v=20260921-live-lite-2';
+import {LiveCamera} from './live-camera.mjs?v=20260921-live-lite-2';
+import {defaultFilmSettings,readFilmSettings,saveFilmSettings} from './film-settings.mjs?v=20260921-live-lite-2';
 const $=id=>document.getElementById(id);
 let session,preset,settings,photoURL,photoFile,shooting=false,ready=false;
 const status=text=>$('camera-status').textContent=text;
@@ -11,7 +11,7 @@ function recipeUI(){
  $('camera-recipe').hidden=!(r51||t3);$('camera-r51-field').hidden=!r51;$('camera-r51-profile').value=settings.r51Profile==='flash'?'flash':'noflash';
  const defaults=defaultFilmSettings(preset),base=r51?{...defaults,...r51Settings(settings.r51Profile)}:defaults;
  const edited=Object.keys(base).some(key=>base[key]!==settings[key]);
- $('camera-recipe-note').textContent=(r51?'R-51 · '+r51Name(settings.r51Profile):'T3 · 5219E · 无闪实测')+(edited?' · 含自定义调整':' · 默认配方')+'。预览与成片使用同一配方；部分处理为近似。'+(r51?'有闪配方不会开启手机闪光灯。':'');
+ $('camera-recipe-note').textContent=(r51?'R-51 · '+r51Name(settings.r51Profile):'T3 · 5219E · 无闪实测')+(edited?' · 含自定义调整':' · 默认配方')+'。拍照使用完整配方，省电取景只预览颜色；部分处理为近似。'+(r51?'有闪配方不会开启手机闪光灯。':'');
  document.querySelectorAll('[data-camera-preset]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.cameraPreset===preset.id)));
  const u=new URL(location.href);u.searchParams.set('preset',preset.id);history.replaceState(null,'',u);
 }
@@ -30,6 +30,7 @@ async function init(){try{
  $('camera-recipe-reset').onclick=()=>{settings=defaultFilmSettings(preset);saveFilmSettings(preset,settings);selection();};
  $('camera-start').onclick=()=>session.start();$('camera-stop').onclick=()=>session.stop();
  $('camera-flip').onclick=async()=>{session.facing=session.facing==='environment'?'user':'environment';$('camera-flip').textContent=session.facing==='user'?'切换后置':'切换前置';session.mirror=session.facing==='user';$('camera-mirror').checked=session.mirror;if(session.running)await session.start(session.facing);};
+ $('camera-preview-mode').onchange=e=>{session.previewMode=e.target.value;status(e.target.value==='color'?'省电颜色预览：拍照会计算完整效果。':'完整效果预览较耗性能；卡顿时切回省电颜色预览。');};
  $('camera-mirror').onchange=e=>session.mirror=e.target.checked;$('camera-quality').onchange=e=>session.previewSize=Number(e.target.value);
  $('camera-amount').oninput=e=>{settings.amount=Number(e.target.value)/100;$('camera-amount-value').textContent=e.target.value+'%';saveFilmSettings(preset,settings);recipeUI();session.refresh();};
  $('camera-shutter').onclick=async()=>{if(shooting)return;shooting=true;state();try{const shot=await session.capture();if(!shot)return;releasePhoto();photoURL=URL.createObjectURL(shot.blob);const tag=shot.preset===R51_ID?'_'+shot.settings.r51Profile:shot.preset===MEASURED_5219_ID?'_noflash':'';const name=`Gloam_${shot.preset}${tag}_${Date.now()}.png`;photoFile=new File([shot.blob],name,{type:'image/png'});$('camera-shot-image').src=photoURL;$('camera-download').href=photoURL;$('camera-download').download=name;$('camera-shot-info').textContent=`${shot.width} × ${shot.height} · ${shot.preset===R51_ID?r51Name(shot.settings.r51Profile):shot.preset===MEASURED_5219_ID?'5219E 无闪实测':shot.preset} · PNG`;$('camera-size').textContent=`${shot.width} × ${shot.height}`;$('camera-shot').hidden=false;$('camera-share').hidden=!navigator.canShare?.({files:[photoFile]});status('照片已生成。点击“保存照片”下载，或通过分享菜单存储。');}catch(e){status(e.message);}finally{shooting=false;state();}};
